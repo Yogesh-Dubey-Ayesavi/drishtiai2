@@ -31,6 +31,6 @@ jobs:
             - ./node_modules
       - run:
           name: Generate Builds
-          command: npm run make
+          command: npm run publish
       - store_artifacts:
           path: ~/repo/out/make
