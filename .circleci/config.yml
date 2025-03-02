@@ -19,7 +19,12 @@ jobs:
           command: |
             sudo apt-get update -y
             sudo apt-get install -y dpkg fakeroot rpm
-
+      - run:
+          name: Install Mono and Wine
+          command: |
+            sudo dpkg --add-architecture i386
+            sudo apt-get update -y
+            sudo apt-get install -y wine64 wine32 mono-devel
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -27,6 +32,5 @@ jobs:
       - run:
           name: Generate Builds
           command: npm run make
-
       - store_artifacts:
           path: ~/repo/out/make
